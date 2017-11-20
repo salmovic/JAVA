@@ -1,0 +1,58 @@
+module Acciones
+{
+	//declaramos un arreglo para los bists de la imagen
+	typedef sequence<octet> bitsImg;
+	//datos empleado cliente
+	struct Cliente
+	{
+		string nombre;
+		string apellidos;
+		string direccion;
+		string noCuenta;
+		string nip;
+		double saldo;
+		bitsImg foto;
+		long lenFoto;
+	};
+	//creamos una lista de tipo Cliente
+	typedef sequence<Cliente> liCliente;
+
+	//Datos de movimientos
+	struct Movimientos
+	{
+		long id;
+		string nombre;
+		string apellidos;
+		string noCuenta;
+		string operacion;
+		string fecha;
+		string hora;
+	};
+	//declaracion de una lista de tipo Movimientos
+	typedef sequence<Movimientos> liMovimientos;
+	//interface de operaciones
+	interface Operaciones
+	{
+		//insertar
+		boolean setCliente(in Cliente dts);
+		//actualizar
+		boolean updateCliente(in Cliente dts);
+		//eliminar
+		boolean deleteCliente(in string id);
+		//login cliente
+		boolean getLoginCliente(in string noc,in string nip);
+		//login admin
+		boolean getLoginAdmin(in string usr,in string pass);
+		//buscar cliente
+		liCliente getClienteBy(in string txt);
+		//obtener todos los clientes
+		liCliente getCliente();
+		void mensaje(in string nom,in string op,in string tipUs,in string desk,in string ip);
+		//OPERACIONES
+		double getSaldo(in string noCuenta);
+		boolean retiro(in string no,in double cant);
+		boolean depositar(in string no,in double cant);
+		boolean tiempoAire(in string no,in double cant);
+		boolean pagoServicio(in string no,in double cant);
+	};
+};
